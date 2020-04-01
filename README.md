@@ -78,7 +78,7 @@ DefineExternalAuth couch_auth environment /usr/local/bin/couchdb-auth.sh
   Require valid-user
 </LocationMatch>
 ```
-	
+  
 #### `/usr/local/bin/couchdb-auth.sh`:
 Make basic auth query against CouchDB's `/_session` endpoint. Only if response code is 200 you are authorized and the script exists with `0`.
 
@@ -202,40 +202,40 @@ Combining that with our CouchDB authentication, we'll get a Apache config like s
 
 ```conf
 <VirtualHost *:80>
-	ServerName refbyrev.com
-	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/html
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+  ServerName refbyrev.com
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/html
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-	# Configure git http backend
-	SetEnv GIT_PROJECT_ROOT /var/www/git
-	SetEnv GIT_HTTP_EXPORT_ALL
-	ScriptAlias / /usr/lib/git-core/git-http-backend/
+  # Configure git http backend
+  SetEnv GIT_PROJECT_ROOT /var/www/git
+  SetEnv GIT_HTTP_EXPORT_ALL
+  ScriptAlias / /usr/lib/git-core/git-http-backend/
 
-	# Accelerated static Apache 2.x
-	# Similar to the above, but Apache can be used to return static files that
-	# are stored on disk. On many systems this may be more efficient as Apache
-	# can ask the kernel to copy the file contents from the file system
-	# directly to the network:
-	AliasMatch ^/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$          /var/www/git/$1
-	AliasMatch ^/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/www/git/$1
+  # Accelerated static Apache 2.x
+  # Similar to the above, but Apache can be used to return static files that
+  # are stored on disk. On many systems this may be more efficient as Apache
+  # can ask the kernel to copy the file contents from the file system
+  # directly to the network:
+  AliasMatch ^/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$          /var/www/git/$1
+  AliasMatch ^/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/www/git/$1
 
-	<Directory "/usr/lib/git-core">
-		Options +ExecCGI +SymLinksIfOwnerMatch
-		Require all granted
-	</Directory>
+  <Directory "/usr/lib/git-core">
+    Options +ExecCGI +SymLinksIfOwnerMatch
+    Require all granted
+  </Directory>
 
-	# Authenticate against CouchDB
-	DefineExternalAuth couch_auth environment /usr/local/bin/couchdb-auth.sh
+  # Authenticate against CouchDB
+  DefineExternalAuth couch_auth environment /usr/local/bin/couchdb-auth.sh
 
-	<LocationMatch "^/(?<username>[^/]+)/">
-        AuthType Basic
-        AuthName "Ref by Rev"
-        AuthBasicProvider external
-        AuthExternal couch_auth
-        Require user %{env:MATCH_USERNAME}
-	</LocationMatch>
+  <LocationMatch "^/(?<username>[^/]+)/">
+    AuthType Basic
+    AuthName "Ref by Rev"
+    AuthBasicProvider external
+    AuthExternal couch_auth
+    Require user %{env:MATCH_USERNAME}
+  </LocationMatch>
 </VirtualHost>
 ```
 
