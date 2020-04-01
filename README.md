@@ -1,4 +1,4 @@
-# Ref by Rev
+# Two Friends
 For all the #GitOps lovers round here, for offline sync evangelists, for text enthusiasts. This is for you. CouchDB is the tool of choice for synchronizing structured data. But when it comes to plaintext management, nothing can beat Git. Lets have them both. And a changes feed for Git.
 
 This is a minimal example setup, a proof of concept, based on standard components.
@@ -202,7 +202,6 @@ Combining that with our CouchDB authentication, we'll get a Apache config like s
 
 ```conf
 <VirtualHost *:80>
-  ServerName refbyrev.com
   ServerAdmin webmaster@localhost
   DocumentRoot /var/www/html
   ErrorLog ${APACHE_LOG_DIR}/error.log
