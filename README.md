@@ -223,7 +223,6 @@ Combining that with our CouchDB authentication, we'll get a Apache config like s
 
 	<Directory "/usr/lib/git-core">
 		Options +ExecCGI +SymLinksIfOwnerMatch
-		# Order allow,deny
 		Require all granted
 	</Directory>
 
