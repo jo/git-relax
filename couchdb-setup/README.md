@@ -1,7 +1,7 @@
 # Setup CouchDB
 Provision a new CouchDB server.
 
-The script [setup-couchdb.sh](setup-couchdb.sh) runs several idempotent curl commands against CouchDB.
+The script [couchdb-setup.sh](couchdb-setup.sh) runs several idempotent curl commands against CouchDB.
 
 1. Wait for CouchDB to be ready by querying welcome endpoint in a loop
 1. Setup the cluster as single node, usind `_cluster_setup` API

@@ -46,7 +46,7 @@ curl -XPUT --silent http://admin:admin@localhost:5984/_node/nonode@nohost/_confi
 curl -XPUT --silent http://admin:admin@localhost:5984/_users/_security -d '{}'
 ```
 
-See the [couchdb-setup](couchdb-setup) for more information and the complete script.
+See [couchdb-setup](couchdb-setup) for more information and the complete script.
 
 
 ## Authenticator
