@@ -73,6 +73,8 @@ echo "configure session timeout"
 curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/couch_httpd_auth/timeout -d '"86400"'
 ```
 
+TODO: since we use usernames as database names and git directories we will need to strengthen username validation. This will be done by creating another design document in the `_users` database with a validation doc function.
+
 
 ## Authenticator
 User management is done by Couch and we want the Apache Webserver serving our Git repositories to authenticate against it.
@@ -435,5 +437,39 @@ Since isomorphic-git is not good at merging atm we can further implement a **ser
 Since this is all standard technology (Apache, HTTP, Web, Git, CouchDB), we can **implement offline sync natively on almost any platform**.
 
 
+## Documents
+
+The user demands a repo by pushing such document to her database:
+```json
+{
+  "_id": "repo:myrepo",
+  "_rev": "3-ff197c792d754b7666529898cbcae13c"
+}
+```
+
+After the worker has created the repo, the document will look like this:
+```json
+{
+  "_id": "repo:myrepo",
+  "_rev": "3-ff197c792d754b7666529898cbcae13c",
+  "provisionedAt": "2020-04-01T17:40:55+02:00"
+}
+```
+
+This is a push to `master` branch:
+```json
+{
+  "_id": "repo:myrepo:branch:master:ref:2fec5028e492bee6395d77107ae0debd3dd855f2",
+  "_rev": "1-967a00dff5e02add41819138abb3284d"
+}
+```
+
+And this a push to `mybranch`:
+```json
+{
+  "_id": "repo:myrepo:branch:mybranch:ref:6147b545c5c21473dbd4327fcf4121b99fe4dcd2",
+  "_rev": "1-967a00dff5e02add41819138abb3284d"
+}
+```
 
 © 2020 Johannes J. Schmidt
