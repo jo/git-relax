@@ -21,7 +21,7 @@ The script makes an authenticated query against the `_session` endpoint, like so
 ```sh
 curl -u "${USER}:${PASS}" http://localhost:5984/_session
 ```
-and only if the response is a `200` the script exists with `0` which tells Apache2 a successful login attemt.
+and only if the response is a `200` the script exists with `0` which tells Apache2 a successful login attempt.
 
 Some useful links for reference:
 * https://blog.g3rt.nl/custom-http-basic-authentication-apache.html
