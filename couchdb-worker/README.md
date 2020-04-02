@@ -41,7 +41,7 @@ It responds with a JSON like this:
     {
       "db_name": "_users",
       "type": "updated",
-      "seq": "3-g1AAAACLeJzLYWBgYMpgTmHgzcvPy09JdcjLz8gvLskBCScyJNX___8_K4M5kSkXKMCenGxmYmqQjK4Yh_Y8FiDJ0ACk_kNNYQSbYmGRaGqWaIauJwsAUPYqiA"
+      "seq": "3-g1AAAACLeJzLYWBgYMpgTmHgzcvPy09JdcjLz8gvLskBCScyJNX___..."
     }
   ]
 }
@@ -59,7 +59,7 @@ and we get detailed information about that change:
 {
   "results": [
     {
-      "seq": "2-g1AAAACHeJzLYWBgYMpgTmHgzcvPy09JdcjLz8gvLskBCScyJNX___8_K4M5kSkXKMBukJyUZmRsjq4Yh_Y8FiDJ0ACk_kNNYQCbYmSUnJpmZprCwFmal5KalpmXmpIFAKv-KQA",
+      "seq": "2-g1AAAACHeJzLYWBgYMpgTmHgzcvPy09JdcjLz8gvLskBCScyJNX___...",
       "id": "org.couchdb.user:eva",
       "changes": [
         {
