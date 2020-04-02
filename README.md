@@ -40,10 +40,10 @@ Before we can start we´ll configure some stuff using curl:
 * enable CORS
 * session timeout (higher)
 
-For example, to configure `_users` db for public signup, we do
+For example, to configure the global changes feed:
 ```bash
-curl -XPUT --silent http://admin:admin@localhost:5984/_node/nonode@nohost/_config/couchdb/users_db_security_editable -d '"true"'
-curl -XPUT --silent http://admin:admin@localhost:5984/_users/_security -d '{}'
+curl -XPUT --silent "$COUCHDB_URL/_global_changes"
+curl -XPUT --silent "$COUCHDB_URL/_node/nonode@nohost/_config/global_changes/update_db" -d '"true"'
 ```
 
 See [couchdb-setup](couchdb-setup) for more information and the complete script.
