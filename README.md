@@ -472,4 +472,23 @@ And this a push to `mybranch`:
 }
 ```
 
+
+## Docker
+Above has been implemented as a docker compose swarm. Start it with
+
+```sh
+	docker-compose up --build
+```
+
+Now you'll get three endpoints:
+
+* App: http://localhost:3000/
+* CouchDB: http://localhost:5984/
+* Git: http://localhost:8080/
+
+
+## AWS EC2 Image
+I plan to provide Terraform and Ansible playbooks for orchestrating and provisioning an AWS EC2 instance. Maybe I could also provide ready to go images - is this possible?
+
+
 © 2020 Johannes J. Schmidt
