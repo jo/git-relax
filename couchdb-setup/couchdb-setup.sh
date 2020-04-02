@@ -6,7 +6,7 @@
 # * curl
 
 # Usage:
-# ./setup-couchdb.sh COUCHDB_URL
+# ./couchdb-setup.sh COUCHDB_URL
 # eg: ./setup-couchdb.sh http://admin:admin@localhost:5984
 
 COUCHDB_URL=$1

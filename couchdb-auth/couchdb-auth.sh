@@ -5,6 +5,10 @@
 # Requirements:
 # * curl
 
+# Usage:
+# USER=USERNAME PASS=PASSWORD ./couchdb-auth.sh COUCHDB_URL
+# eg: USER=admin PASS=admin ./setup-auth.sh http://localhost:5984
+
 COUCHDB_URL=$1
 
 # Make query with basic auth against CouchDB /_session endpoint. If response code is 200 you are authorized
