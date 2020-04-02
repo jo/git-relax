@@ -1,7 +1,19 @@
 # Two Friends
-For all the #GitOps lovers round here, for offline sync evangelists, for text enthusiasts. This is for you. CouchDB is the tool of choice for synchronizing structured data. But when it comes to plaintext management, nothing can beat Git. Lets have them both. And a changes feed for Git.
+For all the gitlovers 'round here, you offline sync evangelists, text enthusiasts. This is for you.
 
-This is a minimal example setup, a proof of concept, based on standard components.
+CouchDB is the tool of choice for synchronizing structured data. But when it comes to plaintext management, nothing can beat Git. Lets have them both. And a changes feed for Git.
+
+What we will get after following this article is:
+
+* CouchDB & Git Hosting
+* User Management done by CouchDB
+* Per user database
+* Multiple per user repositories
+* Changes feed for Git pushes
+* HTTP Git repository API
+* CORS enabled, web ready
+
+This article describes a minimal example setup, a proof of concept, based on standard components.
 
 
 ## Components
