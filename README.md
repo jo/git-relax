@@ -7,10 +7,10 @@ What we will get after following this article is:
 
 * CouchDB & Git Hosting
 * User Management done by CouchDB
-* Per user database
-* Multiple per user repositories
-* Changes feed for Git pushes
-* HTTP Git repository API
+* Per user CouchDB databases
+* Multiple per user Git repositories
+* Create Git repositories via HTTP PUT (create CouchDB document)
+* CouchDB Changes feed for Git pushes
 * CORS enabled, web ready
 
 This article describes a minimal example setup, a proof of concept, based on standard components.
