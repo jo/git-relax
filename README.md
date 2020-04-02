@@ -52,40 +52,13 @@ See [couchdb-setup](couchdb-setup) for more information and the complete script.
 ## Authenticator
 User management is done by Couch and we want the Apache Webserver serving our Git repositories to authenticate against it.
 
-Apache2 offers the possibility to authenticate using a custom script:
+Apache2 offers the possibility to authenticate using a custom external script:
 
 ```conf
-DefineExternalAuth couch_auth environment /usr/local/bin/couchdb-auth.sh
-
-<Location "/">
-  AuthType Basic
-  AuthName "Ref by Rev"
-  AuthBasicProvider external
-  AuthExternal couch_auth
-  Require valid-user
-</LocationMatch>
-```
-  
-#### `/usr/local/bin/couchdb-auth.sh`:
-Make basic auth query against CouchDB's `/_session` endpoint. Only if response code is 200 you are authorized and the script exists with `0`.
-
-```bash
-#!/bin/bash
-status_code=$(curl --write-out %{http_code} --silent --output /dev/null -u "${USER}:${PASS}" http://localhost:5984/_session)
-
-echo "[notice] $(date) authenticating ${USER}: ${status_code}"
-
-if [[ "$status_code" -ne 200 ]] ; then
-  exit 1
-else
-  exit 0
-fi
+DefineExternalAuth couch_auth environment "/usr/local/bin/couchdb-auth http://localhost:5984"
 ```
 
-See for reference:
-* https://blog.g3rt.nl/custom-http-basic-authentication-apache.html
-* https://github.com/haegar/mod-auth-external/wiki/AuthHowTo 
-* https://unix.stackexchange.com/questions/145571/apache-authorization-for-the-allowed-users
+The [couchdb-auth](couchdb-auth) script receives credentials from Apache and checks them via a query to CouchDB `/_session`.
 
 
 ## Hook

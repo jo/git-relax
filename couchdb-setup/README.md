@@ -15,6 +15,13 @@ The script [couchdb-setup.sh](couchdb-setup.sh) runs several idempotent curl com
 Setup CouchDB depends on curl.
 
 
+## Test
+You can manually run the script like so:
+```sh
+./couchdb-setup.sh http://admin:admin@localhost:5984
+```
+
+
 ## TODO: Username Validation
 Since we use usernames as database names as well as for Git directory names we will need to strengthen username validation. This will be done by creating another design document in the `_users` database with a validation doc function like this:
 ```js
