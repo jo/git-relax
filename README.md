@@ -31,14 +31,7 @@ Lets walk through them, one by one, in order of their dependencies bottom top.
 ## CouchDB
 We gonna use latest CouchDB 3.0.
 
-Before we can start we´ll configure some stuff using curl:
-
-* wait for couch to be ready
-* cluster setup (single node)
-* global changes feed (enable)
-* `_users` db (public signup)
-* enable CORS
-* session timeout (higher)
+Before we can start we´ll configure the cluster, global changes feed, public signup, enable CORS and more.
 
 For example, to configure the global changes feed:
 ```bash
