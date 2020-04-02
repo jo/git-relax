@@ -29,12 +29,5 @@ services:
     ports:
       - 8080:80
 
-#  app-server:
-#    build: ./app-server
-#    depends_on:
-#      - git-server
-#    ports:
-#      - 3000:80
-
 volumes:
   git-data:
