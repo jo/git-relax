@@ -33,12 +33,6 @@ See [couchdb-setup](couchdb-setup) for more information and the complete script.
 ### CouchDB Auth
 User management is done by Couch and we want the Apache Webserver serving our Git repositories to authenticate against it.
 
-Apache2 offers the possibility to authenticate using a custom external script:
-
-```conf
-DefineExternalAuth couch_auth environment "/usr/local/bin/couchdb-auth http://localhost:5984"
-```
-
 The [couchdb-auth](git-server/couchdb-auth) script receives credentials from Apache and checks them via a query to CouchDB `/_session`.
 
 
