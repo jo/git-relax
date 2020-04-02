@@ -7,7 +7,7 @@
 
 # Usage:
 # USER=USERNAME PASS=PASSWORD ./couchdb-auth.sh COUCHDB_URL
-# eg: USER=admin PASS=admin ./setup-auth.sh http://localhost:5984
+# eg: USER=admin PASS=admin ./couchdb-auth.sh http://localhost:5984
 
 COUCHDB_URL=$1
 
