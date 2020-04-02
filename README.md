@@ -3,7 +3,7 @@ For all the gitlovers 'round here, you offline sync evangelists, text enthusiast
 
 CouchDB is the tool of choice for synchronizing structured data. But when it comes to plaintext management, nothing can beat Git. Lets have them both. And a changes feed for Git.
 
-What we will get after following this article is:
+What we will get with Git Relax is:
 
 * CouchDB & Git Hosting
 * User Management done by CouchDB
