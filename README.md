@@ -13,7 +13,7 @@ What we will get after following this article is:
 * CouchDB Changes feed for Git pushes
 * CORS enabled, web ready
 
-This article describes a minimal example setup, a proof of concept, based on standard components.
+This article describes a minimal example setup, a proof of concept, based on standard components:
 
 
 ## Components
