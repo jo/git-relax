@@ -40,40 +40,13 @@ Before we can start we´ll configure some stuff using curl:
 * enable CORS
 * session timeout (higher)
 
+For example, to configure `_users` db for public signup, we do
 ```bash
-COUCH=http://admin:admin@localhost:5984
-
-echo "waiting for CouchDB to come up"
-until $(curl --output /dev/null --silent --head --fail $COUCH); do
-    printf '.'
-    sleep 1
-done
-
-echo "cluster setup"
-curl -XPOST --silent $COUCH/_cluster_setup \
-  -d '{"action":"enable_single_node","username":"admin","password":"admin","bind_address":"0.0.0.0","port":5984,"singlenode":true}' \
-  -H 'Content-Type:application/json'
-
-echo "configure global changes feed"
-curl -XPUT --silent $COUCH/_global_changes
-curl -Xput --silent $COUCH/_node/nonode@nohost/_config/global_changes/update_db -d '"true"'
-
-echo "configure _users db for public signup"
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/couchdb/users_db_security_editable -d '"true"'
-curl -XPUT --silent $COUCH/_users/_security -d '{}'
-
-echo "configure CORS"
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/httpd/enable_cors -d '"true"'
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/cors/origins -d '"*"'
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/cors/credentials -d '"true"'
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/cors/methods -d '"GET, PUT, POST, HEAD, DELETE"'
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/cors/headers -d '"accept, authorization, content-type, origin, referer, x-csrf-token"'
-
-echo "configure session timeout"
-curl -XPUT --silent $COUCH/_node/nonode@nohost/_config/couch_httpd_auth/timeout -d '"86400"'
+curl -XPUT --silent http://admin:admin@localhost:5984/_node/nonode@nohost/_config/couchdb/users_db_security_editable -d '"true"'
+curl -XPUT --silent http://admin:admin@localhost:5984/_users/_security -d '{}'
 ```
 
-TODO: since we use usernames as database names and git directories we will need to strengthen username validation. This will be done by creating another design document in the `_users` database with a validation doc function.
+See the [couchdb-setup](couchdb-setup) for more information and the complete script.
 
 
 ## Authenticator

@@ -1,0 +1,14 @@
+version: '2.0'
+services:
+  couchdb:
+    image: apache/couchdb:latest
+    ports:
+      - 5984:5984
+    environment:
+      - 'COUCHDB_USER=admin'
+      - 'COUCHDB_PASSWORD=admin'
+
+  couchdb-setup:
+    build: ./couchdb-setup
+    depends_on:
+      - couchdb
