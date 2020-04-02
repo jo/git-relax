@@ -13,19 +13,13 @@ What we will get after following this article is:
 * CouchDB Changes feed for Git pushes
 * CORS enabled, web ready
 
-This project describes a minimal example setup, a proof of concept, based on standard components:
+This project describes a minimal example setup, a proof of concept, based on standard components. For scripting, we use Bash.
 
 
 ## Components
+Git Relax is built on top of Apache CouchDB 3.0 and Git, served via Apache2. On top of that we implement a custom authenticator for Apache to authenticate against CouchDB, a Git hook to publish changes to CouchDB user databases, a worker which manages user databases and repositories and a small webapp, which provides an exemplary user interface.
 
-1. Apache CouchDB 3.0
-1. External authenticator for Apache 2 (against CouchDB `_session` API)
-1. A Git hook to push changes to user CouchDB database
-1. A worker listening to changes feed: create user databases and repositories and installs hooks
-1. Git Webserver: Apache 2 with smart Git HTTP protocol using above authenticator
-1. An example webapp for managing repositories and displaying the activity stream
-
-Lets walk through them, one by one, in order of their dependencies bottom top.
+Lets walk through those components, one by one, in order of their dependencies bottom top.
 
 
 ### CouchDB
