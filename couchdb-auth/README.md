@@ -8,7 +8,7 @@ DefineExternalAuth couchdb environment "/usr/local/bin/couchdb-auth http://local
 
 <Location "/">
   AuthType Basic
-  AuthName "Ref by Rev"
+  AuthName "Git Relax"
   AuthBasicProvider external
   AuthExternal couchdb
   Require valid-user
