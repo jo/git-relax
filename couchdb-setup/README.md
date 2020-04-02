@@ -10,6 +10,11 @@ The script [couchdb-setup.sh](couchdb-setup.sh) runs several idempotent curl com
 1. Enable and configure CORS
 1. Increase session timeout
 
+For example, to configure the global changes feed, we issue curl request like this:
+```bash
+curl -XPUT --silent "$COUCHDB_URL/_global_changes"
+curl -XPUT --silent "$COUCHDB_URL/_node/nonode@nohost/_config/global_changes/update_db" -d '"true"'
+```
 
 ## Dependencies
 Setup CouchDB depends on curl.

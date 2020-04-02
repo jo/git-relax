@@ -33,12 +33,6 @@ We gonna use latest CouchDB 3.0.
 
 Before we can start we´ll configure the cluster, global changes feed, public signup, enable CORS and more.
 
-For example, to configure the global changes feed:
-```bash
-curl -XPUT --silent "$COUCHDB_URL/_global_changes"
-curl -XPUT --silent "$COUCHDB_URL/_node/nonode@nohost/_config/global_changes/update_db" -d '"true"'
-```
-
 See [couchdb-setup](couchdb-setup) for more information and the complete script.
 
 
