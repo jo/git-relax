@@ -29,12 +29,7 @@ and it witll spit out a JSON line for each change:
 
 
 ## Workers
-Now that we have a global changes stream we can pass it to our workers. Currently we have two workers:
-
-* Provision User Databases
-* Provision User Repositories
-
-They are stitched together in the pipeline, we'll come to that part above.
+Now that we have a global changes stream we can pass it to our workers. Currently we have two workers. They are stitched together in the pipeline, we'll come to that part above.
 
 
 ### Provision User Databases
