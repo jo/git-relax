@@ -19,8 +19,8 @@ This article describes a minimal example setup, a proof of concept, based on sta
 ## Components
 
 1. Apache CouchDB 3.0
-1. External authenticator for Apache 2 which queries couch session
-1. A Git hook to push changes to the couch
+1. External authenticator for Apache 2 (against CouchDB `_session` API)
+1. A Git hook to push changes to user CouchDB database
 1. A worker listening to changes feed: create user databases and repositories and installs hooks
 1. Git Webserver: Apache 2 with smart Git HTTP protocol using above authenticator
 1. An example webapp for managing repositories and displaying the activity stream
