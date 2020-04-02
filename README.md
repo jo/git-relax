@@ -13,7 +13,7 @@ What we will get after following this article is:
 * CouchDB Changes feed for Git pushes
 * CORS enabled, web ready
 
-This article describes a minimal example setup, a proof of concept, based on standard components:
+This project describes a minimal example setup, a proof of concept, based on standard components:
 
 
 ## Components
@@ -28,7 +28,7 @@ This article describes a minimal example setup, a proof of concept, based on sta
 Lets walk through them, one by one, in order of their dependencies bottom top.
 
 
-## CouchDB
+### CouchDB
 We gonna use latest CouchDB 3.0.
 
 Before we can start we´ll configure the cluster, global changes feed, public signup, enable CORS and more.
@@ -42,7 +42,7 @@ curl -XPUT --silent "$COUCHDB_URL/_node/nonode@nohost/_config/global_changes/upd
 See [couchdb-setup](couchdb-setup) for more information and the complete script.
 
 
-## Authenticator
+### CouchDB Auth
 User management is done by Couch and we want the Apache Webserver serving our Git repositories to authenticate against it.
 
 Apache2 offers the possibility to authenticate using a custom external script:
@@ -54,13 +54,13 @@ DefineExternalAuth couch_auth environment "/usr/local/bin/couchdb-auth http://lo
 The [couchdb-auth](couchdb-auth) script receives credentials from Apache and checks them via a query to CouchDB `/_session`.
 
 
-## CouchDB Git Hook
+### CouchDB Git Hook
 When we push to a Git repository we create a CouchDB document in the users database. This is done by installing a Git `post-receive` hook in the users repositories.
 
 Read [couchdb-git-hook](couchdb-git-hook) for more information.
 
 
-## CouchDB Worker
+### CouchDB Worker
 This is where we connect all the things. The worker listens to CouchDB changes feeds and reacts on specific changes.
 
 1. We listen to a global CouchDB changes feed
@@ -70,7 +70,7 @@ This is where we connect all the things. The worker listens to CouchDB changes f
 See [couchdb-worker](couchdb-worker) for more information.
 
 
-## Gitserver
+### Git Server
 Git comes with a CGI script to serve a repo over http. See https://git-scm.com/book/pl/v2/Git-on-the-Server-Smart-HTTP.
 
 ```conf
@@ -134,7 +134,7 @@ Combining that with our CouchDB authentication, we'll get a Apache config like s
 Now we can serve our Git repositories via http.
 
 
-## Webapp
+### Webapp
 Last but not least we can create a webapp which interacts with our system.
 
 * signup & login
