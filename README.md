@@ -62,36 +62,9 @@ The [couchdb-auth](couchdb-auth) script receives credentials from Apache and che
 
 
 ## Hook
-When we push to a Git repository we create a CouchDB document in the users database. This is done by installing a Git `post-receive` hook, which calls the following script:
+When we push to a Git repository we create a CouchDB document in the users database. This is done by installing a Git `post-receive` hook in the users repositories.
 
-```bash
-repofilename=$(pwd)
-
-reponame=$(basename $repofilename '.git')
-repodirname=$(dirname $repofilename)
-username=$(basename $repodirname)
-
-# read receive ref info from stdin:
-# `<old-value> SP <new-value> SP <ref-name> LF`
-# 0000000000000000000000000000000000000000 f2a4dfdcbb970b22aca260144ac294c31a41a832 refs/heads/master
-# 0000000000000000000000000000000000000000 f2a4dfdcbb970b22aca260144ac294c31a41a832 refs/heads/mybranch
-while read line
-do
-  previous=$(echo "$line" | cut -d " " -f1)
-  current=$(echo "$line" | cut -d " " -f2)
-  ref=$(echo "$line" | cut -d " " -f3)
-  branchname=$(basename "$ref")
-
-  id="repo:$reponame:branch:$branchname:ref:$current"
-
-  payload="{\"_id\":\"$id\"}"
-
-  # TODO: use credentials hopefully (or not hähä) available as environment variable, or the cookie
-  curl -s -XPOST "http://admin:admin@localhost:5984/$username" -d "$payload" -H 'Content-Type:application/json'
-done < /dev/stdin
-```
-
-We receive information about received refs via stdin and create a document in the Couch containing that information.
+Read [git-hook](git-hook) for more information.
 
 
 ## Worker
