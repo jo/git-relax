@@ -65,13 +65,13 @@ and we get detailed information about that change:
         {
           "rev": "1-753ae0157a8b1a22339f3c0ef4f1bf19"
         }
-      ]
-    }
-    "doc": {
+      ],
+      "doc": {
         "_id": "org.couchdb.user:eva",
         "_rev": "1-753ae0157a8b1a22339f3c0ef4f1bf19",
         "type": "user",
         "name": "eva"
+      }
     }
   ]
 }
