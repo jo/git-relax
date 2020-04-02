@@ -57,7 +57,7 @@ The [couchdb-auth](couchdb-auth) script receives credentials from Apache and che
 ## Hook
 When we push to a Git repository we create a CouchDB document in the users database. This is done by installing a Git `post-receive` hook in the users repositories.
 
-Read [git-hook](git-hook) for more information.
+Read [couchdb-git-hook](couchdb-git-hook) for more information.
 
 
 ## Worker

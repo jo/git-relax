@@ -1,4 +1,4 @@
-# Git Hook
+# CouchDB Git Hook
 This hook is installed on user repositories as a `post-receive` hook. The hooks receives information about pushed refs via stdin, like this:
 
 ```
@@ -28,7 +28,7 @@ And this a push to `mybranch`:
 The hook can either be copied over or symlinked into each user repository, or called like this:
 ```
 #!/bin/bash
-/usr/local/bin/post-receive <&0
+/usr/local/bin/couchdb-git-hook <&0
 ```
 
 ## TODO:
@@ -38,5 +38,5 @@ Currently the CouchDB url is hardcoded. We should find a uniform way how to hand
 ## Testing
 You can invoke an test the script manually like so:
 ```sh
-echo "0000000000000000000000000000000000000000 f2a4dfdcbb970b22aca260144ac294c31a41a832 refs/heads/master" | ./post-receive.sh
+echo "0000000000000000000000000000000000000000 f2a4dfdcbb970b22aca260144ac294c31a41a832 refs/heads/master" | ./couchdb-git-hook.sh
 ```
