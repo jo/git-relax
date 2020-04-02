@@ -15,7 +15,7 @@ COUCHDB_URL=$1
 
 declare -A update_seqs_per_db
 
->&2 echo "Listening to changes on $COUCHDB_URL. Press [CTRL+C] to stop.."
+>&2 echo "Listening to changes on $COUCHDB_URL.."
 
 while :
 do

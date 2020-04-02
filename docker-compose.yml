@@ -13,28 +13,28 @@ services:
     depends_on:
       - couchdb
 
-#  worker:
-#    build: ./worker
-#    depends_on:
-#      - setup-couchdb
-#    volumes:
-#      - git-data:/var/www/git
-#
-#  git-server:
-#    build: ./git-server
-#    depends_on:
-#      - worker
-#    volumes:
-#      - git-data:/var/www/git
-#    ports:
-#      - 8080:80
-#
+  couchdb-worker:
+    build: ./couchdb-worker
+    depends_on:
+      - couchdb-setup
+    volumes:
+      - git-data:/var/www/git
+
+  git-server:
+    build: ./git-server
+    depends_on:
+      - couchdb-worker
+    volumes:
+      - git-data:/var/www/git
+    ports:
+      - 8080:80
+
 #  app-server:
 #    build: ./app-server
 #    depends_on:
 #      - git-server
 #    ports:
 #      - 3000:80
-#
-#volumes:
-#  git-data:
+
+volumes:
+  git-data:

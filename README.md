@@ -45,13 +45,13 @@ Apache2 offers the possibility to authenticate using a custom external script:
 DefineExternalAuth couch_auth environment "/usr/local/bin/couchdb-auth http://localhost:5984"
 ```
 
-The [couchdb-auth](couchdb-auth) script receives credentials from Apache and checks them via a query to CouchDB `/_session`.
+The [couchdb-auth](git-server/couchdb-auth) script receives credentials from Apache and checks them via a query to CouchDB `/_session`.
 
 
 ### CouchDB Git Hook
 When we push to a Git repository we create a CouchDB document in the users database. This is done by installing a Git `post-receive` hook in the users repositories.
 
-Read [couchdb-git-hook](couchdb-git-hook) for more information.
+Read [couchdb-git-hook](git-server/couchdb-git-hook) for more information.
 
 
 ### CouchDB Worker
@@ -65,67 +65,9 @@ See [couchdb-worker](couchdb-worker) for more information.
 
 
 ### Git Server
-Git comes with a CGI script to serve a repo over http. See https://git-scm.com/book/pl/v2/Git-on-the-Server-Smart-HTTP.
+We serve our Git repositories via HTTP using Apache2. Authentication is done against CouchDB, see above.
 
-```conf
-SetEnv GIT_PROJECT_ROOT /var/www/git
-SetEnv GIT_HTTP_EXPORT_ALL
-ScriptAlias / /usr/lib/git-core/git-http-backend/
-<Directory "/usr/lib/git-core">
-  Options +ExecCGI +SymLinksIfOwnerMatch
-  Require all granted
-</Directory>
-```
-
-We finally restrict access to the users Git home:
-
-```conf
-<LocationMatch "^/(?<username>[^/]+)/">
-  Require user %{env:MATCH_USERNAME}
-</LocationMatch>
-```
-
-Combining that with our CouchDB authentication, we'll get a Apache config like so:
-
-```conf
-<VirtualHost *:80>
-  ServerAdmin webmaster@localhost
-  DocumentRoot /var/www/html
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
-
-  # Configure git http backend
-  SetEnv GIT_PROJECT_ROOT /var/www/git
-  SetEnv GIT_HTTP_EXPORT_ALL
-  ScriptAlias / /usr/lib/git-core/git-http-backend/
-
-  # Accelerated static Apache 2.x
-  # Similar to the above, but Apache can be used to return static files that
-  # are stored on disk. On many systems this may be more efficient as Apache
-  # can ask the kernel to copy the file contents from the file system
-  # directly to the network:
-  AliasMatch ^/(.*/objects/[0-9a-f]{2}/[0-9a-f]{38})$          /var/www/git/$1
-  AliasMatch ^/(.*/objects/pack/pack-[0-9a-f]{40}.(pack|idx))$ /var/www/git/$1
-
-  <Directory "/usr/lib/git-core">
-    Options +ExecCGI +SymLinksIfOwnerMatch
-    Require all granted
-  </Directory>
-
-  # Authenticate against CouchDB
-  DefineExternalAuth couch_auth environment /usr/local/bin/couchdb-auth.sh
-
-  <LocationMatch "^/(?<username>[^/]+)/">
-    AuthType Basic
-    AuthName "Ref by Rev"
-    AuthBasicProvider external
-    AuthExternal couch_auth
-    Require user %{env:MATCH_USERNAME}
-  </LocationMatch>
-</VirtualHost>
-```
-
-Now we can serve our Git repositories via http.
+Please have a look at [git-server](git-server) which contains the complete configuration.
 
 
 ### Webapp

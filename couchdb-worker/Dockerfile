@@ -4,9 +4,9 @@ RUN apt-get update && apt-get install -y \
   curl \
   jq
 
-COPY . /opt/worker/
-RUN chown -R www-data:www-data /opt/worker
+COPY ./ /opt/couchdb-worker/
+RUN chown -R www-data:www-data /opt/couchdb-worker
 
 USER www-data
 
-CMD [ "/opt/worker/pipeline.sh", "http://admin:admin@couch:5984", "/var/www/git" ]
+CMD [ "/opt/couchdb-worker/couchdb-worker.sh", "http://admin:admin@couch:5984", "/var/www/git" ]
