@@ -17,7 +17,7 @@ This project describes a minimal example setup, a proof of concept, based on sta
 
 
 ## Components
-Git Relax is built on top of Apache CouchDB 3.0 and Git, served via Apache2. On top of that we implement a [custom authenticator](git-server/couchdb-auth) for Apache to authenticate against CouchDB, a [Git hook](git-server/couchdb-git-hook) to publish changes to CouchDB user databases, [a worker](couchdb-worker) which manages user databases and repositories and a small webapp, which provides an exemplary user interface.
+Git Relax is built on top of Apache CouchDB 3.0 and Git, served via Apache2. On top of that we implement a **custom authenticator** for Apache to authenticate against CouchDB, a **Git hook** to publish changes to CouchDB user databases, **a worker** which manages user databases and repositories and a small webapp, which provides an exemplary user interface.
 
 Lets walk through those components, one by one, in order of their dependencies bottom top.
 
