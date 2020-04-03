@@ -26,6 +26,7 @@ And this a push to `mybranch`:
 ```
 
 The hook can either be copied over or symlinked into each user repository, or called like this:
+`hooks/post-receive`:
 ```
 #!/bin/bash
 /usr/local/bin/couchdb-git-hook <&0

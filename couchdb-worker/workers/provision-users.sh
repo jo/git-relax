@@ -23,6 +23,8 @@ while read line; do
       if [ "$already_provisioned" = "null" ]
       then
         username=$(echo "$line" | jq -r '.doc.name')
+        >&2 echo "Provisioning user $username"
+        
         create_db_response=$(curl --silent -XPUT "$COUCHDB_URL/$username")
         update_security_response=$(
           curl --silent -XPUT "$COUCHDB_URL/$username/_security" \

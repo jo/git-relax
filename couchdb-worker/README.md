@@ -126,8 +126,3 @@ and we get detailed information about that change:
 (Note: I abbreviated the doc in this example)
 
 The global-changes-feed script handles all that above and also manages state, that is it keeps track of the update sequence, to only query for new information.
-
-
-## TODO
-
-* Whats missing in the atm is the hook installation routine in `provision-repos` worker.

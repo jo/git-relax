@@ -24,15 +24,21 @@ while read line; do
       # ignore nested types
       if [ -z "$t2" ]
       then
-        already_provisioned=$(echo "$line" | jq -r '.doc.provisionedAt')
         # skip if user database already provisioned
+        already_provisioned=$(echo "$line" | jq -r '.doc.provisionedAt')
         if [ "$already_provisioned" = "null" ]
         then
           repofilename="$GITDIR/$dbname/$v1.git"
+          >&2 echo "Provisioning repo $repofilename"
+          
           create_repo_response=$(
             mkdir -p "$repofilename" && cd "$repofilename" && git init --bare
           )
-          # TODO: install hook
+          cat << EOF > "$repofilename/hooks/post-receive"
+#!/bin/bash
+/usr/local/bin/couchdb-git-hook <&0
+EOF
+          chmod +x "$repofilename/hooks/post-receive"
           now=$(date --iso-8601=seconds)
           doc=$(echo "$line" | jq '.doc' | jq ".provisionedAt = \"$now\"")
           update_repo_doc_response=$(
