@@ -14,13 +14,66 @@
       <aside id=aside></aside>
       <article id=article></article>
     </main>
+    <template id=loginForm>
+      <form>
+        <h2>Please Login</h2>
+        <p>
+          <label for=username-input>Username</label>
+          <input type=text id=username-input name=username required pattern=[a-z]+ minlength=3 maxlength=32 placeholder=eva>
+          <label for=password-input>Password</label>
+          <input type=password id=password-input name=password required minlength=3>
+          <button type=submit>Login</button>
+        </p>
+        <p>or <a href=#>create an account</a></p>
+      </form>
+    </template>
+    <template id=signupForm>
+      <form>
+        <h2>Signup Now</h2>
+        <p>
+          <label for=username-input>Username</label>
+          <input type=text id=username-input name=username required pattern=[a-z]+ minlength=3 maxlength=32 placeholder=eva>
+          <label for=password-input>Password</label>
+          <input type=password id=password-input name=password required minlength=3>
+          <button type=submit>Signup</button>
+        </p>
+      </form>
+    </template>
+    <template id=dashboard>
+      <h2>Hi,</h2>
+      <p>welcome to Git Relax.</p>
+      <h3>Repositories</h3>
+      <form>
+        <p>
+          <label for=reponame-input>New Reposiotory</label>
+          <input type=text id=reponame-input name=reponame required pattern=[a-z]+ minlength=3 maxlength=32 placeholder=notes>
+          <button type=submit>Create Repo</button>
+        </p>
+      </form>
+      <ul id=repositories-list></ul>
+      <h3>Activity</h3>
+      <ul id=activities-list></ul>
+      <p><a href=#>Logout</a></p>
+    </template>
+    <template id=repositoriesListEntry>
+      <li></li>
+    </template>
+    <template id=activitiesListEntry>
+      <li></li>
+    </template>
     <script type=module>
       import { App } from '/app.js'
       App({
         elements: {
-          header,
           aside,
           article
+        },
+        templates: {
+          loginForm,
+          signupForm,
+          dashboard,
+          repositoriesListEntry,
+          activitiesListEntry
         }
       })
     </script>

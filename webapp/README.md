@@ -2,14 +2,11 @@
 Provide exemplary user interface for Git Relax:
 
 * Signup & login
-* Listen to `<username>/_changes` feed and update ui on changes
 * Create repository requests
 * Display list of repos and their status
 * Display activity stream
 
-
-## TODO
-- Signup
+The app listens to `<username>/_changes` feed and updates ui on changes.
 
 
 ## Next Steps

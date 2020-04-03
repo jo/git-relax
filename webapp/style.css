@@ -5,6 +5,6 @@ html {
 .requested {
   color: red;
 }
-.created {
+.provisioned {
   color: green;
 }
