@@ -106,8 +106,5 @@ Now you'll get three endpoints:
 * Git: http://localhost:8080/
 
 
-## AWS EC2 Image
-I plan to provide Terraform and Ansible playbooks for orchestrating and provisioning an AWS EC2 instance. Maybe I could also provide ready to go images - is this possible?
-
 
 © 2020 Johannes J. Schmidt
