@@ -67,7 +67,7 @@ The user demands a repo by pushing such document to her database:
 ```json
 {
   "_id": "repo:myrepo",
-  "_rev": "3-ff197c792d754b7666529898cbcae13c",
+  "_rev": "1-af197c792d754b7666529898cbcae1a1",
   "requestedAt": "2020-04-01T17:40:24+02:00"
 }
 ```
@@ -76,7 +76,8 @@ After the worker has created the repo, the document will look like this:
 ```json
 {
   "_id": "repo:myrepo",
-  "_rev": "3-ff197c792d754b7666529898cbcae13c",
+  "_rev": "2-ff197c792d754b7666529898cbcae13c",
+  "requestedAt": "2020-04-01T17:40:24+02:00",
   "provisionedAt": "2020-04-01T17:40:55+02:00"
 }
 ```
