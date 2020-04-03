@@ -63,7 +63,6 @@ A small [webapp](webapp) provides basic user interface to Git Relax.
 
 
 ## Documents
-
 The user demands a repo by pushing such document to her database:
 ```json
 {
@@ -85,14 +84,6 @@ This is a push to `master` branch:
 ```json
 {
   "_id": "repo:myrepo:branch:master:ref:2fec5028e492bee6395d77107ae0debd3dd855f2",
-  "_rev": "1-967a00dff5e02add41819138abb3284d"
-}
-```
-
-And this a push to `mybranch`:
-```json
-{
-  "_id": "repo:myrepo:branch:mybranch:ref:6147b545c5c21473dbd4327fcf4121b99fe4dcd2",
   "_rev": "1-967a00dff5e02add41819138abb3284d"
 }
 ```
