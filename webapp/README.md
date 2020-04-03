@@ -9,7 +9,6 @@ Provide exemplary user interface for Git Relax:
 
 
 ## TODO
-- Fix cookie usage: currently only works when also logged into Fauxton. The cookie is taken from there, local session cookie ignored.
 - Signup
 
 
