@@ -28,6 +28,13 @@ services:
       - git-data:/var/www/git
     ports:
       - 8080:80
+  
+  webapp:
+    build: ./webapp
+    depends_on:
+      - git-server
+    ports:
+      - 3000:80
 
 volumes:
   git-data:

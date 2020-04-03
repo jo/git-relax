@@ -7,6 +7,12 @@ Provide exemplary user interface for Git Relax:
 * Display list of repos and their status
 * Display activity stream
 
+
+## TODO
+- Fix cookie usage: currently only works when also logged into Fauxton. The cookie is taken from there, local session cookie ignored.
+- Signup
+
+
 ## Next Steps
 We could use **isomorphic-git to access and manipulate our repos** - list change log, repo contents, manipulate files with CodeMirror or ProseMirror or whatever, make commits and so on.
 
