@@ -126,3 +126,7 @@ and we get detailed information about that change:
 (Note: I abbreviated the doc in this example)
 
 The global-changes-feed script handles all that above and also manages state, that is it keeps track of the update sequence, to only query for new information.
+
+
+## Docker
+A [Dockerfile](Dockerfile) installs the dependencies and runs the script in a docker container.

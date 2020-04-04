@@ -48,3 +48,7 @@ Combining that with our [CouchDB authentication](couchdb-auth), we'll get an Apa
 ```
 
 Now we can serve our Git repositories via http.
+
+
+## Docker
+A [Dockerfile](Dockerfile) installs the dependencies, configures and runs Apache2 in a docker container.

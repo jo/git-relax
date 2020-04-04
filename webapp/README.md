@@ -17,3 +17,15 @@ And we can use **PouchDB to have this completely offline**. We can even create r
 Since isomorphic-git is not good at merging atm we can further implement a **server side automatic pull request resolver**. Each client will then operate on their own branch and the worker operates on the git repo, merges that branch to master and vice versa. Conflicts are marked for user resolve and can be displayed in a webapp.
 
 Since this is all standard technology (Apache, HTTP, Web, Git, CouchDB), we can **implement offline sync natively on almost any platform**.
+
+
+## Docker
+A [Dockerfile](Dockerfile), provided for convenience, installs and runs the app on a Apache2 webserver.
+
+
+## Development
+During development I usually just spin up a local server:
+```sh
+http-server webapp
+```
+and have my code change take effect immediately.
