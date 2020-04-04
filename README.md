@@ -60,17 +60,69 @@ Please have a look at [git-server](git-server) which contains the complete confi
 A small [webapp](webapp) provides basic user interface to Git Relax.
 
 
-## Documents
-The user demands a repo by pushing such document to her database:
+
+## API
+Above we looked at the components. Here is what we get: Git Relax exposes two APIs, the Git Smart HTTP and a user and repository management HTTP API via CouchDB.
+
+### User Management
+Create users (signup), update password, login, logout and delete users.
+
+#### Signup
+a `PUT http://localhost:5984/_users/org.apache.user:eva` with the following data
+```json
+{
+  "_id": "org.couchdb.user:eva",
+  "name": "eva",
+  "roles": [],
+  "type": "user",
+  "password": "eva"
+}
+```
+
+will signup the user `eva`. Once the worker has finished, it will insert a `provisionedAt` stamp, to indicate the user database has been completely provisioned:
+```json
+{
+  "_id": "org.couchdb.user:eva",
+  "_rev": "2-89695ec69bf034daca2fd2bed4a71ce8",
+  "name": "eva",
+  "roles": [],
+  "type": "user",
+  "password_scheme": "pbkdf2",
+  "iterations": 10,
+  "derived_key": "f04aaa47b1533a720003b8ae0e50d0afbb8ae004",
+  "salt": "4b05ca0e8d1fcbc1ac14b74e389075b5",
+  "provisionedAt": "2020-04-03T10:20:18+00:00"
+}
+```
+
+### Login
+Now we can ask for a session cookie, via a `POST http://localhost:5984/_session`, supplying credentials:
+```json
+{
+  "name": "eva",
+  "password": "eva"
+}
+```
+
+and we'l get back a cookie like this:
+
+```
+AuthSession=ZXZhOjVFODg0ODBEOvh6xalPAhvqCGWwRfvvWQfgOSif; Version=1; Expires=Sun, 05-Apr-2020 08:40:45 GMT; Max-Age=86400; Path=/; HttpOnly
+```
+
+Having such cookie we can get the session information with a `GET http://localhost:5984/_session`.
+
+
+### Repository Management
+Repositories are stored inside the user database. The user demands a repo by pushing a repository request document to her database: `PUT http://localhost:5984/eva/repo:myrepo` with data
 ```json
 {
   "_id": "repo:myrepo",
-  "_rev": "1-af197c792d754b7666529898cbcae1a1",
   "requestedAt": "2020-04-01T17:40:24+02:00"
 }
 ```
 
-After the worker has created the repo, the document will look like this:
+After the worker has created the repo, the document will include a `provisionedAt` stamp:
 ```json
 {
   "_id": "repo:myrepo",
@@ -80,7 +132,8 @@ After the worker has created the repo, the document will look like this:
 }
 ```
 
-This is a push to `master` branch:
+### Git Pushes
+Git pushes are synced to the user database. For every push there will be a document created with information about the repo, branch and revision. This, for example, is a push to `master` branch:
 ```json
 {
   "_id": "repo:myrepo:branch:master:ref:2fec5028e492bee6395d77107ae0debd3dd855f2",
@@ -90,14 +143,35 @@ This is a push to `master` branch:
 ```
 
 
+### Changes Feed
+The user can listen to a changes feed on their database using the `_changes` api:
+```
+GET http://localhost:5984/eva/_changes
+```
+
+This feed has various options for creating a continuous update stream. See [the `/db/_changes` feed documentation](https://docs.couchdb.org/en/stable/api/database/changes.html) for detailed information.
+
+
+### Git Smart HTTP
+Git Repositories are available under `http://localhost:8080/eva/<repository name>.git`.
+
+
 ## Docker
-Above has been implemented as a docker compose swarm. Start it with
+All above has been implemented as a docker compose swarm:
+
+* _couchdb_: runs CouchDB 3.0
+* _couchdb-setup_: run setup script and exit afterwards
+* _couchdb-worker_: runs the worker
+* _git-server_: serves the Git repositories
+* _webapp_: serves the webapp
+
+Start it with
 
 ```sh
 	docker-compose up --build
 ```
 
-Now you'll get three endpoints:
+Now you'll get the three endpoints:
 
 * App: http://localhost:3000/
 * CouchDB: http://localhost:5984/
