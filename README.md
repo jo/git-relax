@@ -107,7 +107,7 @@ Now we can ask for a session cookie, via a `POST http://localhost:5984/_session`
 and we'l get back a cookie like this:
 
 ```
-AuthSession=ZXZhOjVFODg0ODBEOvh6xalPAhvqCGWwRfvvWQfgOSif; Expires=Sun, 05-Apr-2020 08:40:45 GMT; Max-Age=86400;
+AuthSession=ZXZhOjVFODg0ODBEOvh6xalPAhvqCGWwRfvvWQfgOSif
 ```
 
 Having such cookie we can get the session information with a `GET http://localhost:5984/_session`.
