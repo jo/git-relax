@@ -178,5 +178,7 @@ Now you'll get the three endpoints:
 * Git: http://localhost:8080/
 
 
+Thats basically it so far. Look through the components in this repository, most of its directories contain READMEs with more detailed information. This is just the minimal setup to create a Git Relax development infrastructure and proof of concept to play with. From here on we can make up our minds about how to deploy and scale that thing, do benchmarks and optimize performance. The basics are clear and based on standards all over: Git, HTTP, UNIX Pipes, Apache2 etc. Both Git and CouchDB are decentralized from their hart, which helps us when it comes to scaling up and down, or building federal application architectures.
+
 
 © 2020 Johannes J. Schmidt
