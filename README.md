@@ -168,7 +168,7 @@ All above has been implemented as a docker compose swarm:
 Start it with
 
 ```sh
-	docker-compose up --build
+docker-compose up --build
 ```
 
 Now you'll get the three endpoints:
