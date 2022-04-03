@@ -33,13 +33,20 @@ do
     dbname=$(echo "$db_change" | jq -r '.db_name')
     if [ "$dbname" != "_dbs" ]
     then
+      >&2 echo "Found changes on db $dbname"
+
       since=${update_seqs_per_db[$dbname]}
       if [ $since ]
       then
-        changes=$(curl --silent "$COUCHDB_URL/$dbname/_changes?include_docs=true&since=$since}")
+        >&2 echo "Requesting changes for db $dbname since $since"
+        changes=$(curl --silent "$COUCHDB_URL/$dbname/_changes?include_docs=true&since=$since")
       else
+        >&2 echo "Requesting changes for db $dbname since the beginning"
         changes=$(curl --silent "$COUCHDB_URL/$dbname/_changes?include_docs=true")
       fi
+
+      >&2 echo "Found changes on db $dbname: $changes"
+
       update_seqs_per_db["$dbname"]=$(echo "$changes" | jq -r '.last_seq')
 
       # build change object with db name and filter out design documents
