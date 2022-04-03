@@ -1,6 +1,6 @@
-FROM ubuntu:latest
+FROM ubuntu:focal
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y curl
 
 COPY ./couchdb-setup.sh /usr/local/bin/couchdb-setup
 
